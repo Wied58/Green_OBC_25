@@ -28,7 +28,7 @@
 // 22 Write Xbee character to string
 // 23 polish of 22
 // 24 Port for Teensy 3.6, 9250
-// 26 Port for Teensy 3.0, 9250
+// 25 Port for Teensy 3.0, 9250
 
 //http://arduino.stackexchange.com/questions/21846/how-to-convert-string-to-byte-array
 
@@ -179,7 +179,7 @@ void loop() {
        myFile.print(QUALITY);
        myFile.print(",");
        flash(TIME);
-       radio(SATS);
+       radio(SATS, QUALITY);
       } //End of GGA if
       else if (nmeaId == "$GPRMC") { //RMC if
         String nmeaSen = inString;   
@@ -273,7 +273,7 @@ myFile.print(myIMU.temperature, 1);
 // if (inChar != '\n') { // Not end of line, white character to string
 //      inString += (char)inChar;
 //       } // End of Not end of line, white character to string
-void radio(String gpsSATS)
+void radio(String gpsSATS, String gpsQUALITY)
 {
      char getData;
      String xbeeString = ""; // Xbee port incoming data buffer
@@ -295,7 +295,10 @@ void radio(String gpsSATS)
           digitalWrite(camera2, LOW);
           xbeeString = 'a';
           Serial2.print("gpsSATS=");
-          Serial2.println(gpsSATS);
+          Serial2.print(gpsSATS);
+          Serial2.print(" gpsQUALITY=");
+          Serial2.print(gpsQUALITY);
+          Serial2.println();
     } //End of A if
     
     else if(xbeeString == "B"){
