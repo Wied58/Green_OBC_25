@@ -179,7 +179,7 @@ void loop() {
        myFile.print(QUALITY);
        myFile.print(",");
        flash(TIME);
-       radio(SATS, QUALITY);
+       radio(TIME, LAT, LAT_DIR, LONG, LONG_DIR, ALT, SATS, QUALITY);
       } //End of GGA if
       else if (nmeaId == "$GPRMC") { //RMC if
         String nmeaSen = inString;   
@@ -273,7 +273,10 @@ myFile.print(myIMU.temperature, 1);
 // if (inChar != '\n') { // Not end of line, white character to string
 //      inString += (char)inChar;
 //       } // End of Not end of line, white character to string
-void radio(String gpsSATS, String gpsQUALITY)
+
+
+
+void radio(String gpsTIME, String gpsLAT, String gpsLAT_DIR, String gpsLONG, String gpsLONG_DIR, String gpsALT, String gpsSATS, String gpsQUALITY)
 {
      char getData;
      String xbeeString = ""; // Xbee port incoming data buffer
@@ -291,19 +294,31 @@ void radio(String gpsSATS, String gpsQUALITY)
     
     
     if(xbeeString == "A"){
-          digitalWrite(camera1, HIGH);
-          digitalWrite(camera2, LOW);
+         // digitalWrite(camera1, HIGH);
+         // digitalWrite(camera2, LOW);
           xbeeString = 'a';
-          Serial2.print("gpsSATS=");
+          
+          Serial2.print(gpsTIME);
+          Serial2.print(",");
+          Serial2.print(gpsLAT);
+          Serial2.print(",");
+          Serial2.print(gpsLAT_DIR);
+          Serial2.print(",");
+          Serial2.print(gpsLONG);
+          Serial2.print(",");
+          Serial2.print(gpsLONG_DIR);
+          Serial2.print(",");
+          Serial2.print(gpsALT);
+          Serial2.print(",");
           Serial2.print(gpsSATS);
-          Serial2.print(" gpsQUALITY=");
+          Serial2.print(",");
           Serial2.print(gpsQUALITY);
           Serial2.println();
     } //End of A if
     
     else if(xbeeString == "B"){
-          digitalWrite(camera1, LOW); 
-          digitalWrite(camera2, HIGH);
+         // digitalWrite(camera1, LOW); 
+         // digitalWrite(camera2, HIGH);
             
           Serial2.print("b");
     } // End of B else if
