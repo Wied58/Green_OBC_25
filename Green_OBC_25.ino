@@ -28,7 +28,7 @@
 // 22 Write Xbee character to string
 // 23 polish of 22
 // 24 Port for Teensy 3.6, 9250
-// 25 Port for Teensy 3.0, 9250
+// 25 Port for Teensy 3.0, 9250 Adds Xbee monitoring
 
 //http://arduino.stackexchange.com/questions/21846/how-to-convert-string-to-byte-array
 
